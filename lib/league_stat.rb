@@ -8,15 +8,15 @@ module LeagueStat
     @team_id_goals ||=
       all_game_teams.each_with_object(Hash.new) do |(game_id, home_away), team_id_goals|
         home_away.each do |key, game_team|
-        # home_away.each do |key, game_team|
           team_id_goals[game_team.team_id] ||= {goals: 0, game_count: 0, opponent_goals: 0}
           team_id_goals[game_team.team_id][:goals] += game_team.goals
           team_id_goals[game_team.team_id][:game_count] += 1
           team_id_goals[game_team.team_id][:game_id] = game_team.game_id
+
           if key == "away"
-            team_id_goals[game_team.team_id][:opponent_goals] += home_away["home"].goals
-          elsif key == "home"
-            team_id_goals[game_team.team_id][:opponent_goals] += home_away["away"].goals
+            team_id_goals[game_team.team_id][:opponent_goals] += (home_away["home"].goals)
+          else
+            team_id_goals[game_team.team_id][:opponent_goals] += (home_away["away"].goals)
           end
         end
       end
