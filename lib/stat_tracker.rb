@@ -1,12 +1,13 @@
 require_relative 'team'
 require_relative 'game'
 require_relative 'game_team'
+require_relative 'seasonal_sum'
 require_relative '../module/game_stat'
 require_relative '../module/league_stat'
 require_relative '../module/team_stat'
 require_relative '../module/season_stat'
 require_relative '../module/opponent_stat'
-require_relative '../module/seasonal_sumary_stat'
+# require_relative '../module/seasonal_sumary_stat'
 require 'csv'
 
 class StatTracker
@@ -15,13 +16,20 @@ class StatTracker
   include TeamStat
   include SeasonStat
   include OpponentStat
-  include SeasonalSumaryStat
+  # include SeasonalSumaryStat
   attr_reader :all_teams, :all_games, :all_game_teams
 
   def initialize(team_hash, game_hash, game_teams_array)
     @all_teams = team_hash
     @all_games = game_hash
     @all_game_teams = game_teams_array
+  end
+
+  def seasonal_summary(team_id)
+    # new_summary = SeasonalSummary.new(team_id)
+    # new_summary.seasonal_summary
+
+    SeasonalSummary.new(team_id).seasonal_summary
   end
 
   def self.from_csv(file_paths)
