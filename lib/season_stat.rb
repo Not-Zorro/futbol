@@ -76,4 +76,17 @@ module SeasonStat
     end
     lowest_scoring_game.goals
   end
+
+  def biggest_team_blowout(team_id)
+    if game_results(team_id).keys.include?("WIN")
+      game_id_wins = game_results(team_id)["WIN"].map {|gt_obj| gt_obj.game_id}
+      goal_differences = game_id_wins.map do |game_id|
+        (all_games[game_id].away_goals - all_games[game_id].home_goals).abs
+      end
+      goal_differences.max
+    else
+      "Error: Team did not win any games"
+    end
+  end
+
 end

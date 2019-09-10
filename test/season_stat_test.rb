@@ -61,4 +61,9 @@ class TeamStatTest < Minitest::Test
     assert_equal (["WIN", "LOSS"]), @stat_tracker.game_results("4").keys
     assert_instance_of GameTeam, @stat_tracker.game_results("4").values[0][0]
   end
+
+  def test_biggest_team_blowout
+    assert_equal 499, @stat_tracker.biggest_team_blowout("6")
+  end
+
 end
