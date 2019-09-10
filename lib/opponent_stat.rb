@@ -11,24 +11,19 @@ module OpponentStat
       else
         oppo_id = game.away_team_id
       end
-      opponent_hash[oppo_id] ||= Hash.new
+      opponent_hash[oppo_id] = Hash.new{|hash, key| hash[key] = []}
       if game.home_team_id == team_id
-        opponent_hash[oppo_id]["WINS"] ||= Array.new
         opponent_hash[oppo_id]["WINS"] << game if game.home_goals > game.away_goals
-        opponent_hash[oppo_id]["LOSS"] ||= Array.new
         opponent_hash[oppo_id]["LOSS"] << game if game.home_goals < game.away_goals
-        opponent_hash[oppo_id]["TIES"] ||= Array.new
         opponent_hash[oppo_id]["TIES"] << game if game.home_goals == game.away_goals
       elsif game.away_team_id == team_id
-        opponent_hash[oppo_id]["WINS"] ||= Array.new
         opponent_hash[oppo_id]["WINS"] << game if game.away_goals > game.home_goals
-        opponent_hash[oppo_id]["LOSS"] ||= Array.new
         opponent_hash[oppo_id]["LOSS"] << game if game.away_goals < game.home_goals
-        opponent_hash[oppo_id]["TIES"] ||= Array.new
         opponent_hash[oppo_id]["TIES"] << game if game.away_goals == game.home_goals
       end
     end
     opponent_hash
+    binding.pry
   end
 
   def head_to_head(team_id)
