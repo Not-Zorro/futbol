@@ -4,7 +4,8 @@ require_relative '../lib/stat_tracker'
 require_relative '../lib/team'
 require_relative '../lib/game'
 require_relative '../lib/game_team'
-require_relative '../module/seasonal_sumary_stat'
+require_relative '../lib/seasonal_sum'
+# require_relative '../module/seasonal_sumary_stat'
 require 'mocha/minitest'
 require 'pry'
 
@@ -55,17 +56,17 @@ class SeasonSumTest < Minitest::Test
     assert_equal expected, @stat_tracker.seasonal_summary("24")
   end
 
-  def test_seasonal_summary_helper
-    assert_instance_of Array, @stat_tracker.seasonal_summary_helper("2").values[0].values[0]
-    assert_instance_of GameTeam, @stat_tracker.seasonal_summary_helper("2").values[0].values[0][0]
-  end
-
-  def test_opponent_summary
-    gt_1 = mock("gt_1")
-    gt_2 = mock("gt_2")
-    gt_1.expects(:game_id).returns("2012030161")
-    gt_2.expects(:game_id).returns("2012030162")
-    arr = [gt_1, gt_2]
-    assert_instance_of Array, @stat_tracker.opponent_summary("24", arr)
-  end
+  # def test_seasonal_summary_helper
+  #   assert_instance_of Array, @stat_tracker.seasonal_summary_helper("2").values[0].values[0]
+  #   assert_instance_of GameTeam, @stat_tracker.seasonal_summary_helper("2").values[0].values[0][0]
+  # end
+  #
+  # def test_opponent_summary
+  #   gt_1 = mock("gt_1")
+  #   gt_2 = mock("gt_2")
+  #   gt_1.expects(:game_id).returns("2012030161")
+  #   gt_2.expects(:game_id).returns("2012030162")
+  #   arr = [gt_1, gt_2]
+  #   assert_instance_of Array, @stat_tracker.opponent_summary("24", arr)
+  # end
 end
